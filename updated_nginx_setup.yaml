@@ -41,7 +41,7 @@
 
     - name: Copy custom Azure index.html
       copy:
-        src: index-azure.html
+        src: index_azure.html
         dest: /var/www/html/index.html
         owner: www-data
         group: www-data
