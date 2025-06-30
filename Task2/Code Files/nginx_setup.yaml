@@ -1,0 +1,24 @@
+---
+- name: Setup Nginx on AWS and Azure
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Verify Welcome Page
+      shell: curl -s http://localhost
+      register: nginx_output
+
+    - name: Check if Nginx welcome message exists
+      assert:
+        that: "'Welcome to nginx!' in nginx_output.stdout"
